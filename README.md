@@ -29,13 +29,13 @@ python main.py
 ```
 
 ## Phân công
-
-Nguyễn Minh Đại Dương - N23DCCN082: Feature 1
-Nguyễn Quốc Dương - N23DCCN150: Feature 1
-Hồ Văn Đức - N23DCCN147: Feature 2
-Trần Hoàng Đạt - N23DCCN145: Feature 2
-Phạm Đình Hải - N23DCCN153: Khởi tạo, set up project, Feature 3
-
+| Họ tên                | MSSV       | Phân công                           |
+| --------------------- | ---------- | ----------------------------------- |
+| Nguyễn Minh Đại Dương | N23DCCN082 | Feature 1                           |
+| Nguyễn Quốc Dương     | N23DCCN150 | Feature 1                           |
+| Hồ Văn Đức            | N23DCCN147 | Feature 2                           |
+| Trần Hoàng Đạt        | N23DCCN145 | Feature 2                           |
+| Phạm Đình Hải         | N23DCCN153 | Khởi tạo, set up project, Feature 3 |
 
 ## Thư viện sử dụng
 

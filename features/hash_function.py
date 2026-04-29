@@ -175,3 +175,42 @@ def _do_hash_file(algorithm: str):
 
         if not ask_try_again():
             break
+
+def _do_verify_hash(algorithm: str):
+    """Bonus: kiểm tra tính toàn vẹn — so sánh hash của text với hash đã biết."""
+    while True:
+        clear_screen()
+        print_banner()
+        algo_label = "MD5" if algorithm == "md5" else "SHA-256"
+        print(f"  {Color.BOLD}# Hash Function → {algo_label} → Xác minh Hash{Color.RESET}")
+        print_separator()
+        print_info("Nhập văn bản gốc và hash đã biết để xác minh tính toàn vẹn.")
+        print()
+
+        text = input(f"  {Color.YELLOW}Văn bản gốc: {Color.RESET}")
+        known_hash = input(f"  {Color.YELLOW}Hash cần so sánh: {Color.RESET}").strip()
+
+        if not text or not known_hash:
+            print_error("Vui lòng nhập đầy đủ thông tin.")
+            if not ask_try_again():
+                break
+            continue
+
+        try:
+            result = compute_hash(text, algorithm)
+            computed = result["hex_digest"]
+
+            print()
+            print_result_box("Hash tính được", computed)
+            print_result_box("Hash cần so sánh", known_hash)
+
+            if compare_hashes(computed, known_hash):
+                print_success("✔ KHỚP! Văn bản toàn vẹn, không bị thay đổi.")
+            else:
+                print_error("✘ KHÔNG KHỚP! Văn bản đã bị thay đổi hoặc hash sai.")
+
+        except Exception as e:
+            print_error(f"Lỗi: {e}")
+
+        if not ask_try_again():
+            break

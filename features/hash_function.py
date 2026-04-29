@@ -98,3 +98,42 @@ def _algo_menu() -> str | None:
     else:
         print_error("Lựa chọn không hợp lệ.")
         return None
+    
+
+def _do_hash_text(algorithm: str):
+    """Luồng: nhập text → tính hash → hiển thị kết quả."""
+    while True:
+        clear_screen()
+        print_banner()
+        algo_label = "MD5" if algorithm == "md5" else "SHA-256"
+        print(f"  {Color.BOLD}# Hash Function → {algo_label} → Nhập văn bản{Color.RESET}")
+        print_separator()
+
+        print_info("Nhập văn bản cần băm (Enter để kết thúc nhập).")
+        if algorithm == "md5":
+            print_info("Lưu ý: MD5 không còn an toàn về mật mã, chỉ dùng cho mục đích học tập.")
+        print()
+
+        text = input(f"  {Color.YELLOW}Plaintext: {Color.RESET}")
+
+        if not text:
+            print_error("Văn bản không được để trống.")
+            if not ask_try_again():
+                break
+            continue
+
+        try:
+            result = compute_hash(text, algorithm)
+
+            print()
+            print_result_box(f"Thuật toán: {result['algo_name']}", "")
+            print_result_box("Giá trị Hash (hex)", result["hex_digest"])
+            print_info(f"Độ dài: {result['bit_length']} bit ({result['byte_length']} bytes, {len(result['hex_digest'])} ký tự hex)")
+
+            offer_copy(result["hex_digest"])
+
+        except Exception as e:
+            print_error(f"Lỗi: {e}")
+
+        if not ask_try_again():
+            break

@@ -4,7 +4,11 @@ Thuật toán: MD5, SHA-256
 """
 
 import hashlib
-
+from utils.display import (
+    clear_screen, print_banner, print_separator,
+    print_result_box, print_success, print_error,
+    print_info, ask_try_again, offer_copy, Color
+)
 
 # ─── Core logic ───────────────────────────────────────────────
 
@@ -72,3 +76,25 @@ def compute_hash_from_file(filepath: str, algorithm: str) -> dict:
 def compare_hashes(hash1: str, hash2: str) -> bool:
     """So sánh hai giá trị hash (case-insensitive)."""
     return hash1.strip().lower() == hash2.strip().lower()
+
+# ─── Sub-menus ────────────────────────────────────────────────
+
+def _algo_menu() -> str | None:
+    """Hiển thị menu chọn thuật toán. Trả về 'md5', 'sha256', hoặc None."""
+    print(f"\n  {Color.BOLD}Chọn thuật toán:{Color.RESET}")
+    print_separator()
+    print(f"  {Color.CYAN}[1]{Color.RESET} MD5     (128-bit / 32 ký tự hex)")
+    print(f"  {Color.CYAN}[2]{Color.RESET} SHA-256 (256-bit / 64 ký tự hex) ← Khuyến nghị")
+    print(f"  {Color.CYAN}[0]{Color.RESET} Quay lại")
+    print_separator()
+
+    choice = input(f"  {Color.YELLOW}➜ Chọn: {Color.RESET}").strip()
+    if choice == "1":
+        return "md5"
+    elif choice == "2":
+        return "sha256"
+    elif choice == "0":
+        return None
+    else:
+        print_error("Lựa chọn không hợp lệ.")
+        return None

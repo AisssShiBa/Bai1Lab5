@@ -69,3 +69,6 @@ def compute_hash_from_file(filepath: str, algorithm: str) -> dict:
         "algo_name": algo_name,
     }
 
+def compare_hashes(hash1: str, hash2: str) -> bool:
+    """So sánh hai giá trị hash (case-insensitive)."""
+    return hash1.strip().lower() == hash2.strip().lower()

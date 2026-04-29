@@ -214,3 +214,59 @@ def _do_verify_hash(algorithm: str):
 
         if not ask_try_again():
             break
+
+
+def _hash_action_menu(algorithm: str):
+    """Menu chọn hành động sau khi đã chọn thuật toán."""
+    while True:
+        clear_screen()
+        print_banner()
+        algo_label = "MD5" if algorithm == "md5" else "SHA-256"
+        print(f"  {Color.BOLD}# Hash Function → {algo_label}{Color.RESET}")
+        print_separator()
+        print(f"  {Color.CYAN}[1]{Color.RESET} Hash văn bản (Text)")
+        print(f"  {Color.CYAN}[2]{Color.RESET} Hash từ File (Bonus)")
+        print(f"  {Color.CYAN}[3]{Color.RESET} Xác minh Hash (Verify Integrity - Bonus)")
+        print(f"  {Color.CYAN}[0]{Color.RESET} Quay lại chọn thuật toán")
+        print_separator()
+
+        choice = input(f"  {Color.YELLOW}➜ Chọn: {Color.RESET}").strip()
+
+        if choice == "1":
+            _do_hash_text(algorithm)
+        elif choice == "2":
+            _do_hash_file(algorithm)
+        elif choice == "3":
+            _do_verify_hash(algorithm)
+        elif choice == "0":
+            break
+        else:
+            print_error("Lựa chọn không hợp lệ.")
+            input(f"  {Color.YELLOW}Nhấn Enter để tiếp tục...{Color.RESET}")
+
+
+# ─── Entry point ──────────────────────────────────────────────
+
+def hash_menu():
+    """Menu chính của Feature 3: Hash Function."""
+    while True:
+        clear_screen()
+        print_banner()
+        print(f"  {Color.BOLD}# FEATURE 3: HÀM BĂM (Hash Function){Color.RESET}")
+        print_separator()
+        print(f"  {Color.CYAN}[1]{Color.RESET} MD5     — 128-bit")
+        print(f"  {Color.CYAN}[2]{Color.RESET} SHA-256 — 256-bit  {Color.GREEN}(Khuyến nghị){Color.RESET}")
+        print(f"  {Color.CYAN}[0]{Color.RESET} Quay về Main Menu")
+        print_separator()
+
+        choice = input(f"  {Color.YELLOW}➜ Chọn thuật toán: {Color.RESET}").strip()
+
+        if choice == "1":
+            _hash_action_menu("md5")
+        elif choice == "2":
+            _hash_action_menu("sha256")
+        elif choice == "0":
+            break
+        else:
+            print_error("Lựa chọn không hợp lệ.")
+            input(f"  {Color.YELLOW}Nhấn Enter để tiếp tục...{Color.RESET}")

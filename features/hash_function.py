@@ -137,3 +137,41 @@ def _do_hash_text(algorithm: str):
 
         if not ask_try_again():
             break
+
+def _do_hash_file(algorithm: str):
+    """Bonus: tính hash của file."""
+    while True:
+        clear_screen()
+        print_banner()
+        algo_label = "MD5" if algorithm == "md5" else "SHA-256"
+        print(f"  {Color.BOLD}# Hash Function → {algo_label} → Hash từ File{Color.RESET}")
+        print_separator()
+        print_info("Nhập đường dẫn đến file cần tính hash.")
+        print()
+
+        filepath = input(f"  {Color.YELLOW}Đường dẫn file: {Color.RESET}").strip()
+
+        if not filepath:
+            print_error("Đường dẫn không được để trống.")
+            if not ask_try_again():
+                break
+            continue
+
+        try:
+            result = compute_hash_from_file(filepath, algorithm)
+
+            print()
+            print_result_box(f"{result['algo_name']} của file: {filepath}", result["hex_digest"])
+            print_info(f"Độ dài: {result['bit_length']} bit")
+
+            offer_copy(result["hex_digest"])
+
+        except FileNotFoundError:
+            print_error(f"Không tìm thấy file: {filepath}")
+        except PermissionError:
+            print_error("Không có quyền đọc file này.")
+        except Exception as e:
+            print_error(f"Lỗi: {e}")
+
+        if not ask_try_again():
+            break

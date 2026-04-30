@@ -1,6 +1,6 @@
 # Cryptography Toolkit
 
-CLI App Python — Bài tập môn An toàn thông tin
+CLI App Python — Bài tập môn An toàn và Bảo mật Hệ thống thông tin
 
 ## Cấu trúc project
 

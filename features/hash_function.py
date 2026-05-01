@@ -187,8 +187,17 @@ def _do_verify_hash(algorithm: str):
         print_info("Nhập văn bản gốc và hash đã biết để xác minh tính toàn vẹn.")
         print()
 
-        text = input(f"  {Color.YELLOW}Văn bản gốc: {Color.RESET}")
-        known_hash = input(f"  {Color.YELLOW}Hash cần so sánh: {Color.RESET}").strip()
+        print(f"{Color.YELLOW}Nhập văn bản (Enter 2 lần để kết thúc):{Color.RESET}")
+        lines = []
+        while True:
+            line = input()
+            if line == "":
+                break
+            lines.append(line)
+
+        text = "\r\n".join(lines)
+
+        known_hash = input(f"{Color.YELLOW}Hash cần so sánh: {Color.RESET}").strip()
 
         if not text or not known_hash:
             print_error("Vui lòng nhập đầy đủ thông tin.")
